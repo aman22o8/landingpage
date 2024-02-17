@@ -1,0 +1,108 @@
+.each_list_card{
+    margin: 7px;
+    border-radius: 8px;
+    border: 1px solid #454a4d;
+    cursor: pointer;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* height:384px; */
+}
+@media screen and (min-width:687px){
+    .each_list_card{
+        width:300px;
+    }
+}
+.thumbnails_image{
+    width:100%;
+    height:300px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    
+}
+.each_product_footer{
+    padding:0px 15px;
+    background-color: #141414;
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    /* width:92%; */
+    height:30%;
+    justify-content: space-evenly;
+    padding-bottom: 18px;
+
+
+}
+.add_cart_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.product_heading{
+font-family: "sans-serif";
+font-size: 18px;
+font-weight: 500;
+
+letter-spacing: 0.05em;
+text-align: left;
+color:#E5DFD9;
+
+}
+.product_description{
+    font-family: "Segoe UI";
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 15px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    color:#E5DFD9; 
+}
+.price_container{
+    display: flex;
+    width:100%;
+    align-items: flex-end;
+    
+}
+.rupee_label_container{
+    display: flex;
+    align-items: center;
+    height:45px;
+}
+.price_heading{
+font-family: Encode Sans;
+font-size: 25px;
+font-weight: 700;
+line-height: 23px;
+letter-spacing: 0px;
+color:#E5DFD9;
+
+
+}
+.discountpercentage{
+font-family: Encode Sans;
+font-size: 12px;
+font-weight: 500;
+line-height: 15px;
+letter-spacing: 0em;
+text-align: left;
+font-family: Raleway;
+font-size: 12px;
+font-weight: 400;
+line-height: 14px;
+letter-spacing: 0em;
+text-align: left;
+color:#2FC14F;
+margin-left: 3px;
+
+}
+.overlay{
+    position: relative;
+    height: 10%;
+    width: 10%;
+    top: -346px;
+    bottom: 0px;
+    left: 115px;
+    right: 0
+}

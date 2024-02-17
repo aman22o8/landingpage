@@ -1,0 +1,93 @@
+
+.all_product_container{
+   
+    padding:0px 20px;
+}
+.number_of_product_{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border:1px solid #ffffff;
+    border-radius: 5px;
+    height:45px;
+    padding:0px 10px;
+}
+.category_desc{
+    font-family: "Encode Sans";
+font-size: 18px;
+font-weight: 500;
+line-height: 20px;
+letter-spacing: 0.1em;
+text-align: left;
+color:#E5DFD9;
+
+}
+.product_number_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.number_desc{
+font-family: "Encode Sans";
+font-size: 16px;
+font-weight: 500;
+line-height: 20px;
+letter-spacing: 0.1em;
+text-align: left;
+color:#E5DFD9;
+margin-right: 10px;
+}
+.all_product_ul_container{
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    display: flex;
+    flex-wrap:wrap;
+    width:100%;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    
+    align-items: center;
+    height:80vh;
+}
+
+  .failure_container {
+    height: 92%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .failure_image {
+    height: 300px;
+    width: 275px;
+  }
+  .failure_heading {
+    font: normal normal 600 21px 'Roboto';
+    color: #ffffff;
+  }
+  .failure_desc {
+    font: normal normal 400 15px 'Roboto';
+    color: #cbd5e1;
+  }
+  .failure_btn{
+    height:40px;
+    width:100px;
+    border:none;
+    border-radius: 8px;
+    background-color: #42275a;
+    font:normal normal 900 16px "Roboto";
+    color:#cbd5e1;
+    cursor: pointer;
+  }
+  .categories{
+    font: normal normal 600 21px 'Roboto';
+    color: #ffffff;
+  }
+  .selectOption{
+    height:30px;
+
+  }
