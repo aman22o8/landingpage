@@ -16,7 +16,12 @@ I have made a landing page of a e commerce website
 </div>
 <br/>
 
-
+### Technologies Used
+### -> React.js
+### -> Axios
+### -> Uuid
+### -> React Icon
+### -> React Router
 
 ### `npm start`
 
