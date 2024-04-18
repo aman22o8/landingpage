@@ -1,0 +1,27 @@
+.selection_container{
+    display: flex;
+    justify-content: center;
+    width:100%;
+}
+.different_category_container{
+    margin: 0px;
+    padding:0px;
+    display:flex;
+    list-style-type: none;
+
+}
+.selected_items{
+    margin:0px 5px;
+
+}
+.selection_button{
+    border:none;
+    outline:none;
+    cursor: pointer;
+    background-color: transparent;
+    font:normal normal 300 20px/1.5 "Roboto";
+    color:#ffffff;
+}
+.selection_button:hover{
+    color:#ddeefa;
+}

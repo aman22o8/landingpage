@@ -88,6 +88,19 @@ margin-right: 10px;
     color: #ffffff;
   }
   .selectOption{
-    height:30px;
+    display: flex;
+    margin:0px;
+    padding:0px;
+    align-items: center;
+    list-style-type: none;
+    justify-content: space-between;
+    width:100%;
 
+  }
+  .list_image_items{
+    margin:2px 5px;
+  }
+  .category_images{
+    height:63px;
+    width:53px
   }

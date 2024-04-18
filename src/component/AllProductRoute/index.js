@@ -1,93 +1,120 @@
 import './index.css'
-import {Component} from 'react'
+import {useState,useReducer,useEffect} from 'react'
 import Loader from 'react-loader-spinner'
+import { v4 as uuidv4 } from 'uuid';
 import ProductCard from '../ProductCard'
 import { BsBoxArrowUp } from "react-icons/bs";
+import ProductSelection from '../PoductSelection';
 
-const apiConstant = {
-    INITIAL: 'initial',
-    SUCCESS: 'success',
-    PROGRESS: 'in_progress',
-    FAILURE: 'failure',
+const ImageUrl=[
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416257/saleassist/Group_301_yefhz5.png"},
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416254/saleassist/Group_302_jqz16a.png"},
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416224/saleassist/Group_300_yat3np.png"},
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416251/saleassist/Group_303_mvj7br.png"},
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416249/saleassist/Group_304_tk1vx4.png"},
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416246/saleassist/Group_305_x1lkgn.png"},
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416226/saleassist/Group_307_ezalaa.png"},
+  {id:uuidv4(),
+  imageUrl:"https://res.cloudinary.com/duzagabr6/image/upload/v1713416207/saleassist/Group_475_phunko.png"},
+]
+
+
+  const apiConstant = {
+  INITIAL: 'initial',
+  SUCCESS: 'success',
+  PROGRESS: 'in_progress',
+  FAILURE: 'failure',
+}
+
+const useReducerFunction=(state,action)=>{
+  
+  switch (action.type) {
+    case apiConstant.PROGRESS:{
+      return{...state,currentprocess:apiConstant.PROGRESS };
+    }
+    case apiConstant.SUCCESS:{
+      return{...state,currentprocess:apiConstant.SUCCESS,mydata:action.data };
+    }
+    case apiConstant.FAILURE:{
+      return{...state,currentprocess:apiConstant.FAILURE };
+    }
+  
+    default:{
+      return null;
+    }
+      
   }
-  const categories=[
-    "smartphones",
-    "laptops",
-    "fragrances",
-    "skincare",
-    "groceries",
-    "home-decoration",
-    "furniture",
-    "tops",
-    "womens-dresses",
-    "womens-shoes",
-    "mens-shirts",
-    "mens-shoes",
-    "mens-watches",
-    "womens-watches",
-    "womens-bags",
-    "womens-jewellery",
-    "sunglasses",
-    "automotive",
-    "motorcycle",
-    "lighting"
-  ]
+}
+
+const initialState={
+  mydata:[],
+  currentprocess:apiConstant.INITIAL
+}
 
 
 
+const  AllProductRoute=()=>{
+    const [fetchcategory, setfetchcategory] = useState(false)
+    const [open, setopen] = useState("")
+    const [state, dispatch] = useReducer(useReducerFunction, initialState)
 
-class AllProductRoute extends Component{
-    state={initialArray:[],initialSelectedValue:"smartphones",currentProcess:apiConstant.INITIAL}
-
-    componentDidMount(){
-        this.getAllproduct()
+    const getMyData= async ()=>{
+      dispatch({type:apiConstant.PROGRESS});
+      const response= fetchcategory ? await fetch(`https://fakestoreapi.com/products/category/${open}`) : await fetch(`https://fakestoreapi.com/products`)
+      
+      const mydatay=await response.json()
+      // console.log(mydatay)
+      if(response.ok){
+          dispatch({type:apiConstant.SUCCESS,data:mydatay})
+      }else{
+          dispatch({type:apiConstant.FAILURE})
+      } 
     }
 
+    useEffect(() => {
+        
+      getMyData()
+    //   return () => {
+    //     second
+    //   }
+    }, [open])
     
-
-    handleFailureButtons=()=>{
-        this.getAllproduct()
+    const handleFailureButtons=()=>{
+        console.log('start')
+        getMyData()
     }
 
-    getAllproduct= async ()=>{
-        this.setState({currentprocess: apiConstant.PROGRESS})
-        const {initialSelectedValue}=this.setState
 
-        let myUrl= `https://dummyjson.com/products`
-        const options={method:'GET'}
-        const result=await fetch(myUrl,options)
-        const data= await result.json()
-        if(result.ok){
-            this.setState({initialArray:data.products,currentProcess:apiConstant.SUCCESS})
-
-        }
-        else{
-            this.setState({currentProcess:apiConstant.FAILURE})
-        }
-
-    }
-
-    renderSuccess=()=>{
-        const {initialArray,initialSelectedValue}=this.state
+    const renderSuccess=()=>{
+        const {mydata}=state
+        console.log(mydata,state)
         return(
             <>
             <div className='number_of_product_'>
-            <p className='category_desc'>{`category : ${initialSelectedValue}`}</p>
+            <p className='category_desc'>{`category : ${fetchcategory ? open : "All" }`}</p>
             <div className='product_number_container'>
-                <p className='number_desc'>{`${initialArray.length} products`}</p>
+                <p className='number_desc'>{`${mydata.length} products`}</p>
                 <BsBoxArrowUp  size={20} style={{marginRight:"15px",color:"#E5DFD9",cursor:"pointer"}}/>
 
             </div>
         </div>
-            <ul className='all_product_ul_container'>{initialArray.map((eachItem)=>(
+            <ul className='all_product_ul_container'>{mydata.map((eachItem)=>(
                 <ProductCard key={eachItem.id} eachItem={eachItem}/>
-            ))}</ul>
+            ))}
+            </ul>
     </>
         )
         
     }
 
-    renderProgress=()=>{
+    const renderProgress=()=>{
         return(
 
             <div className="loader-container" >
@@ -95,7 +122,7 @@ class AllProductRoute extends Component{
       </div>
             )
     }
-    renderFailure=()=>{
+    const renderFailure=()=>{
         return(
         <div className="failure_container">
       <img
@@ -108,7 +135,7 @@ class AllProductRoute extends Component{
         We cannot seems to find the page you are looking for.{' '}
       </p>
       <button
-        onClick={this.handleFailureButtons}
+        onClick={handleFailureButtons}
         className="failure_btn"
         type="button"
       >
@@ -118,38 +145,48 @@ class AllProductRoute extends Component{
     )
     }
 
-    renderAllProduct=()=>{
-        const {currentProcess}=this.state
-        switch (currentProcess) {
+    const renderAllProduct=()=>{
+        const {currentprocess}=state
+        console.log(currentprocess)
+        switch (currentprocess) {
             case apiConstant.SUCCESS:
-                return this.renderSuccess()
+                return renderSuccess()
             case apiConstant.PROGRESS:
-                return this.renderProgress()
+                return renderProgress()
             case apiConstant.FAILURE:
-                return this.renderFailure()
+                return renderFailure()
             default:
                 return null;
         }
-    }
-    handleOnChange=(event)=>{
-        console.log(event.target.value)
-        this.setState({initialSelectedValue:event.target.value},this.getAllproduct)   
+       
     }
 
-    render(){
-        const {initialSelectedValue}=this.state
-        console.log(initialSelectedValue)
+    
+    const myclickedbutton=(valueis)=>{
+        console.log(`my valis is this ==>${valueis}`)
+        setfetchcategory(true)
+        setopen(valueis)
+
+    }
+
+    
+       
         return(
             <div className='all_product_container'>
+                <ProductSelection myclickedbutton={myclickedbutton}/>
              <p className='categories'>Select  from Different Category</p>
-             <select className='selectOption' onChange={this.handleOnChange}>
-                {categories.map((each)=> (<option key={each} value={each}>{each.toUpperCase()}</option>))}
-                </select>   
+             <ul className='selectOption' >
+                {ImageUrl.map((each)=> (<li className='list_image_items' key={each.id} ><img className='category_images' src={each.imageUrl} alt="categoryImage"/></li>))}
+                </ul>   
+            <div>
             
-                {this.renderAllProduct()}
+                 {renderAllProduct()}
+                
+                </div>              
+                <p style={{color:"#ffffff"}}>aman</p>
             </div>
         )
-    }
+    
 }
 
 export default AllProductRoute
