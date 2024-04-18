@@ -11,7 +11,7 @@ I have made a landing page of a e commerce website
 <br/>
 <div style="text-align: center;">
   <div style="max-width:70%;box-shadow:0 2.8px 2.2px rgba(0, 0, 0, 0.12);outline:none;" >
-    <img src="/Screenshot"/>
+    <img src='/public/Screenshot.png' alt="sample"/>
   </div>
 </div>
 <br/>
